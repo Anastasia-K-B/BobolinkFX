@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+
+<Pane prefHeight="758.0" prefWidth="1297.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <VBox prefHeight="72.0" prefWidth="1298.0">
+         <children>
+            <MenuBar prefHeight="32.0" prefWidth="1194.0" style="-fx-background-color: #9d82cd;">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#onSave" text="Сохранить">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#onExit" text="Выйти">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox prefHeight="27.0" prefWidth="1158.0" spacing="10.0" style="-fx-background-color: #f1c615;">
+               <children>
+                  <MenuButton mnemonicParsing="false" style="-fx-background-color: #ffffff;" styleClass="bth" stylesheets="@styles/main.css" text="Инструменты">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#toolSelected" text="Кисть">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/brush.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                      <MenuItem mnemonicParsing="false" onAction="#pencilTool" text="Карандаш">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/pencil.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#Line" text="Линия">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/line.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#Oval" text="Овал">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/oval.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#Rect" text="Квадрат">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/rect.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
+                    </items>
+                  </MenuButton>
+                  <ColorPicker fx:id="colorpicker" style="-fx-background-color: #ffffff;" styleClass="bth" stylesheets="@styles/main.css">
+                     <value>
+                        <Color />
+                     </value></ColorPicker>
+                  <TextField fx:id="bsize" text="18" />
+                  <Button fx:id="clearBth" mnemonicParsing="false" onAction="#clear" style="-fx-background-color: #ffffff;" styleClass="bth" stylesheets="@styles/main.css">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/eraser.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ToggleButton fx:id="zalivka" mnemonicParsing="false" style="-fx-background-color: #ffffff;" styleClass="bth" stylesheets="@styles/main.css" text="Заливка фигуры" />
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#clearCanvas" style="-fx-background-color: #ffffff;" styleClass="bth" stylesheets="@styles/main.css" text="Очистить">
+                     <HBox.margin>
+                        <Insets left="450.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#esc" style="-fx-background-color: #ffffff;" styleClass="bth" stylesheets="@styles/main.css" text="Esc" textAlignment="RIGHT" textOverrun="CLIP">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <Canvas fx:id="canvasGO" height="673.0" layoutY="84.0" width="1297.0" />
+      <Canvas fx:id="canvas" height="675.0" layoutX="-4.0" layoutY="83.0" width="1314.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Canvas>
+   </children>
+</Pane>
